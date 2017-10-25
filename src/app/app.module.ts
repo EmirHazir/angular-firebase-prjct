@@ -1,10 +1,12 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router'
+import { FormsModule } from "@angular/forms";
 
 import { AngularFireModule } from "angularfire2";
 import { AngularFireDatabase } from "angularfire2/database-deprecated";
 import { AngularFireAuth } from "angularfire2/auth";
+import { FlashMessagesModule } from 'angular2-flash-messages';
 
 import { AppComponent } from './app.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
@@ -35,6 +37,10 @@ const appRoutes:Routes=[
   {path:'', component:DashboardComponent},
   {path:'register', component:RegisterComponent},
   {path:'login', component:LoginComponent},
+  {path:'add-employee', component:AddEmployeeComponent},
+  {path:'employee-info/:id', component:EmployeeInfoComponent},
+  {path:'employee-edit/:id', component:EditEmployeeComponent},
+  {path:'employee-info', component:EmployeeInfoComponent},
 ]
 
 @NgModule({
@@ -56,11 +62,14 @@ const appRoutes:Routes=[
     BrowserModule,
     RouterModule.forRoot(appRoutes),
     AngularFireModule.initializeApp(firebaseConfig),
+    FormsModule,
+    FlashMessagesModule
   ],
   providers: [
     EmployeeService,
     AngularFireAuth,
     AngularFireDatabase
+        
   ],
   bootstrap: [AppComponent]
 })

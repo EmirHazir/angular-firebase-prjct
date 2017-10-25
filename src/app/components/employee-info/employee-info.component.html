@@ -1,3 +1,55 @@
-<p>
-  employee-info works!
-</p>
+
+  <a [routerLink]="['/']"  class="btn btn-info">
+    <i class="fa fa-back" aria-hidden="true"> Back to Eployees</i>
+  </a>
+  <hr>
+
+<div class="container">
+  <h3 [class.text.danger]="hasSalary" [class.text.danger]="!hasSalary">Salary:  {{employee.salary | currency:"USD":true}}
+    <button (click)="showSalaryUpdate= !showSalaryUpdate" class="btn btn-outline-secondary"><i class="fa fa-pencil" aria-hidden="true"> Edit</i></button>    
+  </h3>
+
+  <form *ngIf="showSalaryUpdate" (ngSubmit)="updateSalaryEmployee(id)">
+    <div class="form-group">
+      <label for="salary">New Salary</label>
+      <input type="text" class="form-control" name="salary" [(ngModel)]="employee.salary">
+    </div>
+    <button type="submit" class="btn btn-success">Update Salary</button>
+  </form>
+</div>
+<hr>
+
+  <table class="table">
+    <thead>
+      <tr>
+        <th>First Name</th>
+        <th>Last Name</th>
+        <th>Email</th>
+        <th>Country</th>
+        <th>City</th>
+        <th>Phone</th>
+        <th>Salary</th>
+        <th>işlemler</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr >
+        <th>{{employee.firstName}}</th>
+        <th>{{employee.lastName}}</th>
+        <th>{{employee.email}}</th>
+        <th>{{employee.country}}</th>
+        <th>{{employee.city}}</th>
+        <th>{{employee.phone}}</th>
+        <th>{{employee.salary | currency:"USD":true}}</th>
+        <th>
+          <a  [routerLink]="['/employee-edit/'+id]" class="btn btn-warning">
+            <i class="fa fa-pencil" aria-hidden="true"> Edit</i>
+          </a>
+          <button (click)="removeEmployee()"  class="btn btn-danger">
+            <i class="fa fa-trash" aria-hidden="true"> Delete</i>
+          </button>
+        </th>
+      </tr>
+    </tbody>
+  </table>
+

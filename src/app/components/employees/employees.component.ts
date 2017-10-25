@@ -19,24 +19,31 @@ export class EmployeesComponent implements OnInit {
   ngOnInit() {
     this.employeService.getEmployees().subscribe(employees =>{
       this.employees = employees
-    this.getTotalEmployeesWithSalary()
+    // this.getTotalEmployeesWithSalary()
   })
   }
 
 
-  getTotalEmployeesWithSalary(){
-    let emplTotal = 0;
-    let totalSalary = 0;
-    for (var index = 0; index < this.employees.length; index++) {
-      var element = this.employees[index].salary;
-      emplTotal += 1;
-      totalSalary += parseFloat(element.toString())      
-    }
+  // getTotalEmployeesWithSalary(){
+  //   let emplTotal = 0;
+  //   let totalSalary = 0;
+
+    // for (var index = 0; index < this.employees.length; index++) {
+    // this.employees.forEach(element => {
+    //   this.employees[index].salary
+    //   emplTotal += 1;
+    //   totalSalary = parseFloat(totalSalary.toString() + element.salary.toString())
+    // });}
+    // for (var index = 0; index < this.employees.length; index++) {
+    //   let element = this.employees[index].salary;
+    //   emplTotal += 1;
+    //   totalSalary += parseFloat(element.toString())
+    // }
     
-    this.totalEmployees = emplTotal
-    this.totalSalarySum = totalSalary
-    console.log(this.totalEmployees)
-    console.log(this.totalSalarySum)
-  }
+  //   this.totalEmployees = emplTotal
+  //   this.totalSalarySum = totalSalary
+  //   console.log(this.totalEmployees)
+  //   console.log(this.totalSalarySum)
+  // }
 
 }

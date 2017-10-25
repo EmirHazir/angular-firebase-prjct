@@ -1,3 +1,99 @@
-<p>
-  edit-employee works!
-</p>
+<div class="row">
+    
+    <div class="col-sm-6">
+        <a href="" [routerLink]="['/employee-info/'+id]" class="btn btn-success">
+          <i class="fa fa-arrow-circle-o-left" aria-hidden="true"></i> Back Info Page
+        </a>
+      </div>
+
+    <div class="col-sm-6">
+      <h4>Edit Employee</h4>
+      <form novalidate #fo="ngForm" (ngSubmit)="submitForm(fo)">
+        <!-- firstname -->
+        <div class="form-group">
+          <label for="firstName">First Name</label>
+          <input type="text" class="form-control" name="firstName" 
+          [(ngModel)]="employee.firstName" 
+          #employeeFirstName="ngModel" 
+          required
+          minlength="4" 
+          placeholder="Enter your name">
+  
+          <div *ngIf="employeeFirstName.errors?.required && employeeFirstName.touched" class="alert alert-danger">First name is required</div>
+          <div *ngIf="employeeFirstName.errors?.minlength && employeeFirstName.touched" class="alert alert-danger">First name need least min 4 chars</div>
+        </div>
+        <!-- lastname -->
+        <div class="form-group">
+            <label for="lastName">Last Name</label>
+            <input type="text" class="form-control" name="lastName" 
+            [(ngModel)]="employee.lastName" 
+            #employeeLastName="ngModel" 
+            required
+            minlength="4" 
+            placeholder="Enter your last name">
+    
+            <div *ngIf="employeeLastName.errors?.required && employeeLastName.touched" class="alert alert-danger">Last name is required</div>
+            <div *ngIf="employeeLastName.errors?.minlength && employeeLastName.touched" class="alert alert-danger">Last name need least min 4 chars</div>
+          </div>
+          <!-- email -->
+        <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" class="form-control" name="email" 
+            [(ngModel)]="employee.email" 
+            #employeeEmail="ngModel" 
+            required
+            placeholder="Enter your email">
+    
+            <div *ngIf="employeeEmail.errors?.required && employeeEmail.touched" class="alert alert-danger">email is required</div>
+          </div>
+          <!-- country -->
+        <div class="form-group">
+            <label for="country">Country</label>
+            <input type="text" class="form-control" name="country" 
+            [(ngModel)]="employee.country" 
+            #employeeCountry="ngModel" 
+            required
+            minlength="4" 
+            placeholder="Enter your Country">
+    
+            <div *ngIf="employeeCountry.errors?.required && employeeCountry.touched" class="alert alert-danger">Country is required</div>
+            <div *ngIf="employeeCountry.errors?.minlength && employeeCountry.touched" class="alert alert-danger">Country need least min 4 chars</div>
+          </div>
+            <!-- city -->
+        <div class="form-group">
+            <label for="country">City</label>
+            <input type="text" class="form-control" name="city" 
+            [(ngModel)]="employee.city" 
+            #employeeCity="ngModel" 
+            required
+            minlength="4" 
+            placeholder="Enter your City">
+    
+            <div *ngIf="employeeCity.errors?.required && employeeCity.touched" class="alert alert-danger">City is required</div>
+            <div *ngIf="employeeCity.errors?.minlength && employeeCity.touched" class="alert alert-danger">City need least min 4 chars</div>
+          </div>
+            <!-- phone -->
+        <div class="form-group">
+            <label for="phone">Phone Number</label>
+            <input type="text" class="form-control" name="phone" 
+            [(ngModel)]="employee.phone" 
+            #employeePhone="ngModel" 
+            required
+            minlength="10" 
+            placeholder="Enter your phone">
+    
+            <div *ngIf="employeePhone.errors?.required && employeePhone.touched" class="alert alert-danger">Phone is required</div>
+            <div *ngIf="employeePhone.errors?.minlength && employeePhone.touched" class="alert alert-danger">City need least min 10 chars</div>
+          </div>
+            <!-- salary -->
+        <div class="form-group">
+            <label for="salary">Salary</label>
+            <input type="text" class="form-control" name="salary" 
+            [(ngModel)]="employee.salary" 
+            #employeeSalary="ngModel"
+            >
+          </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </form>
+    </div>
+  </div>
