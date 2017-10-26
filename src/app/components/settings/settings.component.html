@@ -7,8 +7,27 @@
 <div class="col-sm-6">
   
   <h4><i class="fa fa-cog" aria-hidden="true"></i> Settings</h4><hr>
-  <label class="checkbox-inline"><input type="checkbox" value=""> Open Register Page</label>
-  <label class="checkbox-inline"><input type="checkbox" value=""> Enable Salary</label>
-  <label class="checkbox-inline"><input type="checkbox" value="">Editable Salary</label>
+ <form (submit)="submitSettings()">
+      <label class="checkbox-inline">
+        <input type="checkbox" value="" 
+        [checked]="settings.isRegisterOpen"
+        (change)="settings.isRegisterOpen =! settings.isRegisterOpen"
+        name="isRegisterOpen"> Open Register Page
+      </label>
+      <label class="checkbox-inline">
+        <input type="checkbox" value=""
+        [checked]="settings.disabledSalary"
+        (change)="settings.disabledSalary =! settings.disabledSalary"
+        name="disabledSalary">
+         Enable Salary</label>
+      <label class="checkbox-inline">
+        <input type="checkbox" value=""
+        [checked]="settings.isSalaryEdiable"
+        (change)="settings.isSalaryEdiable =! settings.isSalaryEdiable"
+        name="isSalaryEdiable"> 
+        Editable Salary</label>
+      <button type="submit" class="btn btn-outline-secondary">Save Settings</button>
+  </form> 
+  
 </div>
 </div>
