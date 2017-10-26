@@ -5,6 +5,8 @@ import {Router} from '@angular/router';
 import { EmployeeService } from '../../services/employee.service';
 import { Employee } from '../../models/employee';
 
+import { SettingsService } from "../../services/settings.service";
+
 @Component({
   selector: 'app-add-employee',
   templateUrl: './add-employee.component.html',
@@ -12,6 +14,7 @@ import { Employee } from '../../models/employee';
 })
 export class AddEmployeeComponent implements OnInit {
 
+  disabledSalary= false
   employee: Employee={
     firstName: '',
     lastName: '',
@@ -21,12 +24,15 @@ export class AddEmployeeComponent implements OnInit {
     phone: 0,
     salary: 0
   }
-  disabledSalary:boolean= true
+  
+
   constructor(public flashMessagesService : FlashMessagesService,
               public router: Router,
-              public employeeService: EmployeeService) { }
+              public employeeService: EmployeeService,
+              public settingService:SettingsService) { }
 
   ngOnInit() {
+    this.disabledSalary = this.settingService.getSettings().disabledSalary;
   }
 
   submitForm({value, valid}:{value:Employee, valid:boolean}){

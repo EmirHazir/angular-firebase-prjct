@@ -3,6 +3,7 @@ import { FlashMessagesService } from "angular2-flash-messages";
 import { Router, ActivatedRoute, Params } from "@angular/router";
 
 import { EmployeeService } from '../../services/employee.service';
+import { SettingsService } from "../../services/settings.service";
 import { Employee } from "../../models/employee";
 
 @Component({
@@ -13,6 +14,8 @@ import { Employee } from "../../models/employee";
 export class EditEmployeeComponent implements OnInit {
 
 id:string;
+isSalaryEdiable:boolean;
+
 employee: Employee={
   firstName:'',
   lastName:'',
@@ -22,18 +25,20 @@ employee: Employee={
   phone:0,
   salary:0
 }
-disabledSalaryEdit:boolean=true;
+
 
   constructor(private employeeService: EmployeeService,
     private flasMessageService: FlashMessagesService,
     private router: Router,
-    private activatedRoute: ActivatedRoute) { }
+    private activatedRoute: ActivatedRoute,
+    private settingsService:SettingsService) { }
 
   ngOnInit() {
     this.id = this.activatedRoute.snapshot.params['id'];
     this.employeeService.getEmployeeById(this.id).subscribe(employee=>{
       this.employee = employee
-    })
+    });
+    this.isSalaryEdiable = this.settingsService.getSettings().isSalaryEdiable;
   }
 
   submitForm({value, valid}:{value:Employee, valid:boolean}){

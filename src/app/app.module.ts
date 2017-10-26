@@ -1,13 +1,17 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router'
+//for route
+import { Routes, RouterModule } from '@angular/router' 
+//for forms
 import { FormsModule } from "@angular/forms";
 
+//firebase and flash message modules
 import { AngularFireModule } from "angularfire2";
 import { AngularFireDatabase } from "angularfire2/database-deprecated";
 import { AngularFireAuth } from "angularfire2/auth";
 import { FlashMessagesModule } from 'angular2-flash-messages';
 
+//Components
 import { AppComponent } from './app.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { EmployeeInfoComponent } from './components/employee-info/employee-info.component';
@@ -20,8 +24,13 @@ import { RegisterComponent } from './components/register/register.component';
 import { SettingsComponent } from './components/settings/settings.component';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 
+//services
 import { EmployeeService } from './services/employee.service';
 import { EmployeesComponent } from './components/employees/employees.component';
+import { AuthService } from "./services/auth.service";
+import { AuthGuard } from "./guards/auth.guard";
+import { SettingsService } from "./services/settings.service";
+import { RegisterGuard } from './guards/register.guard';
 
 export const firebaseConfig={
     apiKey: "AIzaSyBeEYxQyI2RaE5BkaQiwarVSGnULktlTY4",
@@ -34,13 +43,15 @@ export const firebaseConfig={
 
 
 const appRoutes:Routes=[
-  {path:'', component:DashboardComponent},
-  {path:'register', component:RegisterComponent},
+  {path:'', component:DashboardComponent, canActivate:[AuthGuard]},
+  {path:'register', component:RegisterComponent, canActivate:[RegisterGuard]},
   {path:'login', component:LoginComponent},
-  {path:'add-employee', component:AddEmployeeComponent},
-  {path:'employee-info/:id', component:EmployeeInfoComponent},
-  {path:'employee-edit/:id', component:EditEmployeeComponent},
+  {path:'add-employee', component:AddEmployeeComponent, canActivate:[AuthGuard]},
+  {path:'employee-info/:id', component:EmployeeInfoComponent, canActivate:[AuthGuard]},
+  {path:'employee-edit/:id', component:EditEmployeeComponent, canActivate:[AuthGuard]},
   {path:'employee-info', component:EmployeeInfoComponent},
+  {path:'settings', component:SettingsComponent, canActivate:[AuthGuard]},
+  {path:'**', component:PageNotFoundComponent},
 ]
 
 @NgModule({
@@ -68,8 +79,11 @@ const appRoutes:Routes=[
   providers: [
     EmployeeService,
     AngularFireAuth,
-    AngularFireDatabase
-        
+    AngularFireDatabase,
+    AuthService,
+    AuthGuard,
+    SettingsService,
+    RegisterGuard
   ],
   bootstrap: [AppComponent]
 })

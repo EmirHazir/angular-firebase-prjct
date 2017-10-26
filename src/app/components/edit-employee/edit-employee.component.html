@@ -91,6 +91,7 @@
             <input type="text" class="form-control" name="salary" 
             [(ngModel)]="employee.salary" 
             #employeeSalary="ngModel"
+            [disabled]="isSalaryEdiable"
             >
           </div>
         <button type="submit" class="btn btn-primary">Submit</button>
